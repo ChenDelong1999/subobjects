@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+core*
+
+# Distribution / packaging
+.Python
+env/
+build/
+dist/
+eggs/
+*.egg-info/
+bin/
+include/
+lib/
+local/
+man/
+share/
+pip-wheel-metadata/
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+
+*.pt
+
+
+# ignore every __pycache__ folder
+__pycache__/
