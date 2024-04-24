@@ -27,7 +27,7 @@
 
 
 ## Updates
-- **2024/04/24**: We updated our paper with the Direct Segment Anything Model (DirectSAM), which efficiently generates comprehensive subobject segmentations with a single forward pass! Checkout our 🎬Demo Video on [YouTube](https://www.youtube.com/watch?v=tlNs7xUQ0x4) or [bilibili](https://www.bilibili.com/video/BV1yH4y1A7V3/). The model is released on HuggingFace: 🤗[DirectSAM-1800px-0424](https://huggingface.co/chendelong/DirectSAM-1800px-0424).
+- **2024/04/24**: We updated our paper with the Direct Segment Anything Model (DirectSAM), which efficiently generates comprehensive subobject segmentations with a single forward pass! Checkout our latest arXiv ([2402.14327v2](https://arxiv.org/abs/2402.14327v2)) and 🎬Demo Video on [YouTube](https://www.youtube.com/watch?v=tlNs7xUQ0x4) or [bilibili](https://www.bilibili.com/video/BV1yH4y1A7V3/). The pretrained DirectSAM model is released on HuggingFace: 🤗[DirectSAM-1800px-0424](https://huggingface.co/chendelong/DirectSAM-1800px-0424), and the training code is also available in this repo!
 
 
 - **2024/02/22**: The first version of our paper is released on arXiv ([2402.14327](https://arxiv.org/abs/2402.14327)). Codes and models will be open-sourced at this repository.
@@ -80,13 +80,29 @@
     url = "http://images.cocodataset.org/val2017/000000002149.jpg"
     image = Image.open(requests.get(url, stream=True).raw).convert("RGB")
 
-    probs = inference_single_image(image, image_processor, model, pyramid_layers=0)
+    probs = inference_single_image(image, image_processor, model, resolution=None, pyramid_layers=0)
     visualize_direct_sam_result(probs, image, threshold=0.25)
     ```
 
 The `probs` is the predicted boundary probabilities of the image, which is an ndarray of shape (height, width) between 0 and 1. The `visualize_direct_sam_result` function will show visualizations using `matplotlib`, where the `threshold` controls the binarization of the boundary probabilities.
 
 Quality of segmentation can be improved by increasing the input resolution and the number of pyramid layers. The above two groups of figures are generated using `resolution=3600`, `pyramid_layers=1`/`pyramid_layers=2`, and `threshold=0.03`.
+
+
+### Training DirectSAM
+
+We provide an example script to fine-tune DirectSAM on the [ADE20K dataset](https://huggingface.co/datasets/scene_parse_150). The implementation is based on 🤗 HuggingFace Trainer, please see [this blog](https://huggingface.co/docs/transformers/tasks/semantic_segmentation) for a detailed tutorial.
+
+The following command will start a distributed training with 512x512 resolution input and half-precision training, which takes around 9GB memory per GPU. 
+
+```bash
+cd DirectSAM
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 trainer.py
+```
+
+The following figures compare the segmentation results of DirectSAM before and after the above finetuning on ADE20K.
+
+![DirectSAM finetuning](assets/ade20k_finetuning_visualization.jpg)
 
 
 ### Citation

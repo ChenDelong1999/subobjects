@@ -31,5 +31,5 @@ coverage.xml
 *.pt
 
 
-# ignore every __pycache__ folder
+runs/
 __pycache__/

@@ -6,3 +6,5 @@ Pillow
 tqdm
 transformers
 opencv-python
+datasets
+accelerate
