@@ -74,7 +74,7 @@ def inference_single_image(image, image_processor, model, pyramid_layers=0, over
 
     def run(image, bzp=0):
         encoding = image_processor(image, return_tensors="pt")
-        pixel_values = encoding.pixel_values.to(model.device)
+        pixel_values = encoding.pixel_values.to(model.device).to(model.dtype)
 
         with torch.no_grad():
             outputs = model(pixel_values=pixel_values)

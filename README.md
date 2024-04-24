@@ -88,6 +88,7 @@ The `probs` is the predicted boundary probabilities of the image, which is an nd
 
 Quality of segmentation can be improved by increasing the input resolution and the number of pyramid layers. The above two groups of figures are generated using `resolution=3600`, `pyramid_layers=1`/`pyramid_layers=2`, and `threshold=0.03`.
 
+Using half-precision `model.half()` can speed up the inference and reduce the GPU memory requirement.
 
 ### Training DirectSAM
 
