@@ -1,0 +1,9 @@
+# Non-Commercial Research License
+
+The pretrained model weights provided herein are made available strictly for non-commercial research purposes only. 
+
+This model was initialized from NVIDIA's SegFormer, which is subject to NVIDIA's [SegFormer License](https://github.com/NVlabs/SegFormer/blob/master/LICENSE), and trained on Meta's SA-1B dataset, which is subject to Meta's [SA-1B Dataset Research License](https://ai.meta.com/datasets/segment-anything-downloads/). Therefore, your use of this model must strictly adhere to the terms and conditions of both the SegFormer and SA-1B licenses.
+
+Any commercial use is explicitly prohibited. Users must ensure compliance with the original licenses from NVIDIA and Meta when using or distributing derivative works based on this model.
+
+No warranties or guarantees are provided with this model. The model is provided "as is."
