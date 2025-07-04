@@ -3,6 +3,7 @@
 ## [Subobject-level Image Tokenization](https://arxiv.org/abs/2402.14327)
 
 [Delong Chen (陈德龙)](https://chendelong.world/)
+<img src="assets/meta_logo.png" alt="Logo" width="12">
 <img src="assets/hkust_logo.png" alt="Logo" width="8">, &nbsp; 
 [Samuel Cahyawijaya](https://samuelcahyawijaya.github.io/)
 <img src="assets/hkust_logo.png" alt="Logo" width="8">, &nbsp; 
@@ -12,14 +13,13 @@
 [Baoyuan Wang (王宝元)](https://sites.google.com/site/zjuwby/)
 <img src="assets/xiaobing_logo.jpg" alt="Logo" width="10">, &nbsp; 
 [Pascale Fung](https://pascale.home.ece.ust.hk/)
+<img src="assets/meta_logo.png" alt="Logo" width="12">
 <img src="assets/hkust_logo.png" alt="Logo" width="8"> &nbsp; 
 
+<img src="assets/meta_logo.png" alt="Logo" width="16"> Meta FAIR Paris&nbsp; &nbsp; 
 <img src="assets/hkust_logo.png" alt="Logo" width="10"> Hong Kong University of Science and Technology &nbsp; &nbsp; 
 <img src="assets/xiaobing_logo.jpg" alt="Logo" width="15"> Xiaobing.AI
 
-
-<!-- [[arXiv]](https://arxiv.org/abs/2402.14327)&nbsp;|&nbsp;
-[[Github]](https://github.com/ChenDelong1999/subobjects) -->
 
 </div>
 
@@ -27,28 +27,24 @@
 
 
 ## Updates
-- **2024/04/24**: We updated our paper with the Direct Segment Anything Model (DirectSAM), which efficiently generates comprehensive subobject segmentations with a single forward pass! Checkout our latest arXiv ([2402.14327v2](https://arxiv.org/abs/2402.14327v2)) and 🎬Demo Video on [YouTube](https://www.youtube.com/watch?v=tlNs7xUQ0x4) or [bilibili](https://www.bilibili.com/video/BV1yH4y1A7V3/). The pretrained DirectSAM model is released on HuggingFace: 🤗[DirectSAM-1800px-0424](https://huggingface.co/chendelong/DirectSAM-1800px-0424), and the training code is also available in this repo!
 
-- **2024/02/23**: Our paper is featured in AK's 🤗[Huggingface Daily Papers](https://huggingface.co/papers/2402.14327).
+- **2025/07/04**: Our paper is accepted to **ICML 2025**. We released a [notebook](https://github.com/ChenDelong1999/subobjects/blob/main/segmentation.ipynb) for EPOC token segmentation.
 
-- **2024/02/22**: The first version of our paper is released on arXiv ([2402.14327](https://arxiv.org/abs/2402.14327)). Codes and models will be open-sourced at this repository.
+- **2025/03/12** (arXiv v3): We introduce a lightweight 🤗[DirectSAM-b0](https://huggingface.co/chendelong/DirectSAM-b0-1024px-sa1b-2ep-1017) (only 3.7M parameters) and combined it with the [Watershed algorithm](https://en.wikipedia.org/wiki/Watershed_(image_processing)), deriving the **E**fficient and **P**an**O**pti**C** (**EPOC**) tokenizer (EPOC = DirectSAM + Watershed). We provide both 🤗[intrinsic evaluations](https://huggingface.co/datasets/chendelong/HEIT) and extensive VLM experiments to demonstrate the advantages of adaptive image tokenization.
+
+- **2024/04/24** (arXiv v2): We updated our paper with the Direct Segment Anything Model (DirectSAM), which efficiently generates comprehensive subobject segmentations with a single forward pass! Checkout our 🎬 demo video on [YouTube](https://www.youtube.com/watch?v=tlNs7xUQ0x4) or [bilibili](https://www.bilibili.com/video/BV1yH4y1A7V3/). The pretrained DirectSAM model is released on HuggingFace: 🤗[DirectSAM-1800px-0424](https://huggingface.co/chendelong/DirectSAM-1800px-0424), and the training code is also available in this repo.
+
+- **2024/02/23** (arXiv v1): Our paper is featured in AK's 🤗[Huggingface Daily Papers](https://huggingface.co/papers/2402.14327).
 
 
-## Direct Segment Anything Model (DirectSAM)
+## Visualizations
 
-<div align="center">
-
-🎬[Demo Video (YouTube)](https://www.youtube.com/watch?v=tlNs7xUQ0x4) | 🎬[Demo Video (bilibili)](https://www.bilibili.com/video/BV1yH4y1A7V3) | 🤗[DirectSAM-1800px-0424](https://huggingface.co/chendelong/DirectSAM-1800px-0424)
-
-</div>
-
+![compare segmentations](assets/compare_segmentations.png)
 
 ![DirectSAM visualizations](assets/DirectSAM_visualizations.jpg)
 
-![DirectSAM qingming](assets/DirectSAM_qingming.jpg)
 
-
-### Using DirectSAM
+## DirectSAM Inferece
 
 - Clone the repository 
 
@@ -91,7 +87,7 @@ Quality of segmentation can be improved by increasing the input resolution and t
 
 Using half-precision `model.half()` can speed up the inference and reduce the GPU memory requirement.
 
-### Training DirectSAM
+## DirectSAM Training
 
 We provide an example script to fine-tune DirectSAM on the [ADE20K dataset](https://huggingface.co/datasets/scene_parse_150). The implementation is based on 🤗 HuggingFace Trainer, please see [this blog](https://huggingface.co/docs/transformers/tasks/semantic_segmentation) for a detailed tutorial.
 
@@ -107,9 +103,15 @@ The following figures compare the segmentation results of DirectSAM before and a
 ![DirectSAM finetuning](assets/ade20k_finetuning_visualization.jpg)
 
 
-### Citation
 
-If you find this work useful, please consider citing:
+## Acknowledgements
+
+Checkout amazing follow up works that used our model:
+- [DirectSAM-RS](https://github.com/StevenMsy/DirectSAM-RS): Prompting DirectSAM for Semantic Contour Extraction in Remote Sensing Images
+- [RemoteSAM](https://github.com/1e12Leon/RemoteSAM): Towards Segment Anything for Earth Observation
+- [Subobject Video Tokenization](https://arxiv.org/abs/2505.23617): Grounded Video Tokenization via Panoptic Sub-object Trajectory
+
+If you find our work useful, please consider citing: 
 
 ```bibtex
 @article{chen2024subobject,
@@ -128,3 +130,7 @@ If you find this work useful, please consider citing:
   eprint       = {2402.14327}
 }
 ```
+
+![DirectSAM qingming](assets/DirectSAM_qingming.jpg)
+
+> This repository is not released by Meta. The code and models are for research purposes only.

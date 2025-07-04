@@ -8,3 +8,4 @@ transformers
 opencv-python
 datasets
 accelerate
+scikit-image
